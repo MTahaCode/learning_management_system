@@ -13,11 +13,11 @@ function App() {
 
   const [loginCredentials, setLoginCredentials] = useState({loginId: 0, loginType: null});
 
-  useEffect(() => {
-    if (loginCredentials.loginId === 0) {
-      navigate("/");
-    }
-  }, [loginCredentials, navigate]);
+  // useEffect(() => {
+  //   if (loginCredentials.loginId === 0) {
+  //     navigate("/");
+  //   }
+  // }, [loginCredentials, navigate]);
 
   return (
     <div>
