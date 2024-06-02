@@ -4,15 +4,17 @@ const StudentMgmt = () => {
 
   const [formdata, setformdata] = useState({
     name: "",
-    email: ""
+    email: "",
+    password: ""
   })
 
   const [studentList, setStudentList] = useState([]);
 
   const [editForm, setEditForm] = useState({
-    student_id: 0,
+    id: 0,
     name: "",
-    email: ""
+    email: "",
+    password: ""
   });
 
   const getStudentList = () => {
@@ -33,8 +35,8 @@ const StudentMgmt = () => {
   const addStudent = (event) => {
     event.preventDefault();
 
-    if (formdata.name === "" || formdata.email === "") {
-      alert("Name or Email is empty");
+    if (formdata.name === "" || formdata.email === "" || formdata.password === "") {
+      alert("Name or Email or Password is empty");
       return;
     }
 
@@ -47,9 +49,10 @@ const StudentMgmt = () => {
     }).then(res => res.json())
     .then(data => {
       setformdata({
-        student_id: 0,
+        id: 0,
         name: "",
-        email: ""
+        email: "",
+        password: ""
       })
       getStudentList();
     })
@@ -58,9 +61,9 @@ const StudentMgmt = () => {
     })
   }
 
-  const handleDelete = (student_id) => {
+  const handleDelete = (id) => {
     
-    fetch(`/student/${student_id}`, {
+    fetch(`/student/${id}`, {
       method: "DELETE",
     }).then(res => {
       if (!res.ok) {
@@ -74,27 +77,28 @@ const StudentMgmt = () => {
     });
   }
 
-  const putInEditSection = (student_id, name, email) => {
+  const putInEditSection = (id, name, email, password) => {
     setEditForm({
-      student_id: student_id,
+      id: id,
       name: name,
-      email: email
+      email: email,
+      password: password
     })
   }
 
   const handleEdit = (event) => {
     event.preventDefault();
 
-    if (editForm.student_id === 0) {
+    if (editForm.id === 0) {
       alert("no entry selected");
       return;
     }
-    else if (editForm.name === "" || editForm.email === "") {
-      alert("Name or Email is empty");
+    else if (editForm.name === "" || editForm.email === "" || editForm.password === "") {
+      alert("Name or Email or Password is empty");
       return;
     }
 
-    fetch(`/student/${editForm.student_id}`, {
+    fetch(`/student/${editForm.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -105,7 +109,8 @@ const StudentMgmt = () => {
       getStudentList();
       setEditForm({
         name: "",
-        email: ""
+        email: "",
+        password: ""
       });
     }).catch((exc) => {
       console.log("Error: " + exc);
@@ -128,22 +133,28 @@ const StudentMgmt = () => {
         value={formdata.email} 
         onChange={e => setformdata({...formdata, email: e.target.value})} />
 
+        <label htmlFor="Password">Password: </label>
+        <input name="Password" 
+        type="text" 
+        value={formdata.password} 
+        onChange={e => setformdata({...formdata, password: e.target.value})} />  
+
         <button type="submit">Add Student</button>
       </form>
 
       <h1>List of Students</h1>
       {studentList.map((row) => {
         return <>
-          <p>{row.student_id} {row.name} {row.email}</p>
-          <button onClick={() => handleDelete(row.student_id)}>delete</button>
-          <button onClick={() => putInEditSection(row.student_id, row.name, row.email)}>edit</button>
+          <p>{row.id} {row.name} {row.email} {row.password}</p>
+          <button onClick={() => handleDelete(row.id)}>delete</button>
+          <button onClick={() => putInEditSection(row.id, row.name, row.email, row.password)}>edit</button>
         </>
       })}
 
       <h1>Edit Section</h1>
-      <button onClick={() => setEditForm({student_id: 0, name: "", email: ""})}>Clear</button>
+      <button onClick={() => setEditForm({id: 0, name: "", email: "", password: ""})}>Clear</button>
       <form onSubmit={handleEdit}>
-        <p>Id: {editForm.student_id}</p>
+        <p>Id: {editForm.id}</p>
         
         <label htmlFor="editName">Edit Name: </label>
         <input name="editName" 
@@ -156,10 +167,17 @@ const StudentMgmt = () => {
         type="email" 
         value={editForm.email} 
         onChange={e => setEditForm({...editForm, email: e.target.value})}/>
+
+        <label htmlFor="editPassword">Edit Password: </label>
+        <input name="editPassword" 
+        type="text" 
+        value={editForm.password} 
+        onChange={e => setEditForm({...editForm, password: e.target.value})}/>
+
         <button type="submit">Submit Edit</button>
       </form>
     </div>
   )
 }
 
-export default StudentMgmt
+export default StudentMgmt;
