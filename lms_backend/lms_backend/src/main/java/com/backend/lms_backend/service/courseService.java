@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.backend.lms_backend.dao.courseDao;
 import com.backend.lms_backend.entity.course;
-import com.backend.lms_backend.entity.course;
+import com.backend.lms_backend.entity.student;
 
 @Service
 public class courseService {
@@ -39,6 +39,10 @@ public class courseService {
 	public course updatecourse(course updatedStu) {
 		courseDAO.save(updatedStu);
 		return updatedStu;
+	}
+	
+	public List<course> getEnrollableCourses(student studentEntity) {
+		return courseDAO.findUnenrolledCourseByStudent(studentEntity);
 	}
 }
 

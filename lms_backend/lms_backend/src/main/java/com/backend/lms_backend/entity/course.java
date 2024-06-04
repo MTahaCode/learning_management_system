@@ -1,37 +1,60 @@
 package com.backend.lms_backend.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.ArrayList;
 
 @Entity
 public class course {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int course_id;
+	private int id;
+	
+	@OneToMany(mappedBy = "courseEntity",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	@JsonIgnore
+	private List<enrollment> enrollments = new ArrayList<>();
+	
 	private String name;
 	private Integer credits;
 	
 	public course() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public course(int course_id, String name, int credits) {
+	public course(int id, List<enrollment> enrollments, String name, Integer credits) {
 		super();
-		this.course_id = course_id;
+		this.id = id;
+		this.enrollments = enrollments;
 		this.name = name;
 		this.credits = credits;
 	}
 
-	public int getCourse_id() {
-		return course_id;
+	public int getId() {
+		return id;
 	}
 
-	public void setCourse_id(int course_id) {
-		this.course_id = course_id;
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public List<enrollment> getEnrollments() {
+		return enrollments;
+	}
+
+	public void setEnrollments(List<enrollment> enrollments) {
+		this.enrollments = enrollments;
 	}
 
 	public String getName() {
@@ -42,12 +65,11 @@ public class course {
 		this.name = name;
 	}
 
-	public int getCredits() {
+	public Integer getCredits() {
 		return credits;
 	}
 
-	public void setCredits(int credits) {
+	public void setCredits(Integer credits) {
 		this.credits = credits;
 	}
-	
 }

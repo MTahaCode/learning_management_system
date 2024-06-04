@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.lms_backend.entity.enrollment;
 import com.backend.lms_backend.entity.student;
 import com.backend.lms_backend.service.studentService;
 
@@ -20,29 +21,35 @@ import com.backend.lms_backend.service.studentService;
 public class studentController {
 
 	@Autowired
-	private studentService service;
+	private studentService StudentService;
 	
 	@GetMapping("/student")
 	public List<student> retrieverAllStudents() {
-		return service.findAll();
+		return StudentService.findAll();
 	}
 	
 	@GetMapping("/student/{id}")
 	public student retrieveStudent(@PathVariable int id) {
-		return service.findOne(id);
+		return StudentService.findOne(id);
+	}
+	
+	@GetMapping("/student/enrollments/{student_id}")
+	public List<enrollment> retrieveEnrollmentByStudent(@PathVariable int student_id) {
+		student studentEntity = StudentService.findOne(student_id);
+		return studentEntity.getEnrollments();
 	}
 	
 	@PostMapping("/student")
 	public student createStudent(@RequestBody student stu) {
 		System.out.println("adding student");
-		student savedStudent = service.save(stu);
+		student savedStudent = StudentService.save(stu);
 		return savedStudent;
 	}
 	
 	//getting by email and password
 	@PostMapping("student/getByEmailAndPassword") 
 	public student getByEmailPassword(@RequestBody student stu) throws Exception {
-		student foundStudent= service.findStudentByEmailAndPassword(stu.getEmail(), stu.getPassword());
+		student foundStudent= StudentService.findStudentByEmailAndPassword(stu.getEmail(), stu.getPassword());
 		//System.out.println(stu.getStudent_id() + " " + stu.getName() + " " + stu.getEmail() + " " + stu.getPassword());
 		//System.out.println(foundStudent.getStudent_id() + " " + foundStudent.getName() + " " + foundStudent.getEmail() + " " + foundStudent.getPassword());
 		if (foundStudent != null) {
@@ -54,7 +61,7 @@ public class studentController {
 	@DeleteMapping("/student/{id}")
 	public void deleteStudent(@PathVariable int id) throws Exception {
 		try {
-			service.deleteById(id);
+			StudentService.deleteById(id);
 		}
 		catch (Exception e) {
 			throw new Exception("Not found id: " + id);
@@ -63,12 +70,12 @@ public class studentController {
 	
 	@PutMapping("/student/{id}")
 	public student updateStudent(@RequestBody student stu, @PathVariable int id) {
-		student existingStudent = service.findOne(id);
+		student existingStudent = StudentService.findOne(id);
 		if (existingStudent == null) {
 			throw new RuntimeException("Student not found with id: " + id);
 		}
 		stu.setId(id);
-		return service.updateStudent(stu);
+		return StudentService.updateStudent(stu);
 		
 	}
 }
