@@ -26,6 +26,12 @@ public class course {
 	@JsonIgnore
 	private List<enrollment> enrollments = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "courseEntity",
+			cascade = CascadeType.ALL,
+			orphanRemoval = true)
+	@JsonIgnore
+	private List<teacherAssignment> teacherAssignments = new ArrayList<>();
+	
 	private String name;
 	private Integer credits;
 	
@@ -72,4 +78,14 @@ public class course {
 	public void setCredits(Integer credits) {
 		this.credits = credits;
 	}
+
+	public List<teacherAssignment> getTeacherAssignments() {
+		return teacherAssignments;
+	}
+
+	public void setTeacherAssignments(List<teacherAssignment> teacherAssignments) {
+		this.teacherAssignments = teacherAssignments;
+	}
+	
+	
 }
