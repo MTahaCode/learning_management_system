@@ -164,14 +164,6 @@ const EnrollManagement = ({loginCredentials, setLoginCredentials }) => {
                 })}
             </tbody>
         </table>
-        
-
-        for enrolling what is needed one is the table that would have enroll id, course id, student id, section, semester
-        so student can do crud like add an enrollment, (check if the enrollment doesnt already exists)
-        read all his enrollments like get enrollments on the student id
-        can also delete it no updation ig.
-        update can be done by admin and all the rest as well.
-
     </div>
   )
 }

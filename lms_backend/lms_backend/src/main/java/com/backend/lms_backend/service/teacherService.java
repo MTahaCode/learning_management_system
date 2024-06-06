@@ -46,4 +46,8 @@ public class teacherService {
 		teacherDAO.save(updatedStu);
 		return updatedStu;
 	}
+	
+	public List<teacher> getTeacherNotAssignedToACourse(int course_id, String section) {
+		return teacherDAO.findTeacherNotAssignedToCourse(course_id, section);
+	}
 }

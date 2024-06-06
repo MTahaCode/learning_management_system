@@ -37,6 +37,14 @@ public class teacherController {
 		return teacherEntity.getTeacherAssignments();
 	}
 	
+	@GetMapping("/teacher/unassigned/course/{course_id}/section/{section}")
+	public List<teacher> retrieveTeachersNotAssignedToCourse(
+			@PathVariable int course_id,
+			@PathVariable String section
+	) {
+		return TeacherService.getTeacherNotAssignedToACourse(course_id, section);
+	}
+	
 	@PostMapping("/teacher")
 	public teacher createTeacher(@RequestBody teacher tea) {
 		System.out.println("adding teacher");

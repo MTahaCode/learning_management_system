@@ -19,6 +19,5 @@ public interface courseDao extends JpaRepository<course, Integer> {
 	@Query("Select c FROM course c WHERE c.id NOT IN "
 			+ "( SELECT ta.courseEntity.id FROM teacherAssignment ta WHERE ta.teacherEntity = :teacherEntity )")
 	List<course> findUnassignedCourseByTeacher(@Param("teacherEntity") teacher teacherEntity);
-	
 }
 

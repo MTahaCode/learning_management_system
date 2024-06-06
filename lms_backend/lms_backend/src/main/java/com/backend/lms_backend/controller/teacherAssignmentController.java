@@ -36,6 +36,11 @@ public class teacherAssignmentController {
 		return teacherAssignmentService.getTeacherAssignmentsByTeacher(teacherEntity);
 	}
 	
+	@GetMapping("/teacherAssignment/avaliableSectionsOfCourse/{course_id}")
+	public List<String> retrieveAvaliableSectionsOfCourse(@PathVariable int course_id) {
+		return teacherAssignmentService.getSectionsOfCourse(course_id);
+	}
+	
 	@GetMapping("/teacherAssignment/{id}")
 	public teacherAssignment retrieveteacherAssignment(@PathVariable int id) {
 		return teacherAssignmentService.findOne(id);
@@ -73,4 +78,5 @@ public class teacherAssignmentController {
 		return teacherAssignmentService.updateteacherAssignment(ta);
 		
 	}
+	
 }

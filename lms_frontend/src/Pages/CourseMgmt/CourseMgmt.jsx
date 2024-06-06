@@ -129,12 +129,12 @@ const CourseMgmt = () => {
             onChange={e => setAddData({...addData, credits: e.target.value})} />
     
             <button type="submit">Add Course</button>
-          </form>
+          </form>f
     
           <h1>List of Courses</h1>
           {courseList.map((row) => {
             return <>
-              <p>{row.course_id} {row.name} {row.credits}</p>
+              <p>{row.id} {row.name} {row.credits}</p>
               <button onClick={() => handleDelete(row.course_id)}>delete</button>
               <button onClick={() => putInEditSection(row.course_id, row.name, row.credits)}>edit</button>
             </>

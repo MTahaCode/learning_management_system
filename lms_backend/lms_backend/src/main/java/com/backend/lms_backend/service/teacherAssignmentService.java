@@ -44,4 +44,8 @@ public class teacherAssignmentService {
 	public List<teacherAssignment> getTeacherAssignmentsByTeacher( teacher teacherEntity ) {
 		return teacherAssignmentDAO.findByTeacherEntity(teacherEntity);
 	}
+	
+	public List<String> getSectionsOfCourse(int course_id) {
+		return teacherAssignmentDAO.findDistinctSectionsByCourseId(course_id);
+	}
 }

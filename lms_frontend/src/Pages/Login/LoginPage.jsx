@@ -34,7 +34,7 @@ const LoginPage = ({loginCredentials, setLoginCredentials }) => {
                 alert("Cannot find login and password");
             }
             else if (loginCredentials.loginType === "student") {
-                //navigate("/studentManagement");
+                navigate("/enrollment");
             }
         }
     },[loginCredentials, navigate]);
