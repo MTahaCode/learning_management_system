@@ -43,13 +43,14 @@ public class assignmentController {
 		List<assignment> assignments =new ArrayList<assignment>();
 
 		List<enrollment> enrolls = EnrollmentService.getEnrollmentsByStudent(StudentService.findOne(studentid));
-		for(assignment a: assignments)
+		for(assignment a: assignmentService.findAll())
 		{
 			for(enrollment e : enrolls)
 			{
 				if(a.getTeacher_course().getCourseEntity().getId() == e.getCourseEntity().getId() &&e.getCourseEntity().getId() == courseid)
 				{
 					assignments.add(a);
+					break;
 					
 				}
 			}

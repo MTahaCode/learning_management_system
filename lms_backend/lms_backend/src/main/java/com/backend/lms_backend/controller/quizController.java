@@ -44,13 +44,14 @@ public class quizController {
 			List<quiz> quizes =new ArrayList<quiz>();
 
 			List<enrollment> enrolls = EnrollmentService.getEnrollmentsByStudent(StudentService.findOne(studentid));
-			for(quiz q: quizes)
+			for(quiz q: quizService.findAll())
 			{
 				for(enrollment e : enrolls)
 				{
 					if(q.getTeacher_course().getCourseEntity().getId() == e.getCourseEntity().getId() &&e.getCourseEntity().getId() == courseid)
 					{
 						quizes.add(q);
+						break;
 					}
 				}
 			}

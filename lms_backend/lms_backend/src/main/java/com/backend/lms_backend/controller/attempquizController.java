@@ -12,13 +12,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.lms_backend.entity.attemptquiz;
+import com.backend.lms_backend.entity.teacherAssignment;
 import com.backend.lms_backend.service.attemptquizService;
+import com.backend.lms_backend.service.teacherService;
 
 @RestController
 public class attempquizController {
 	@Autowired
 	private attemptquizService attemptquizService;
-	
+	@Autowired
+	private teacherService TeacherService;
 	@GetMapping("/attemptquiz")
 	public List<attemptquiz> retrieverAllattemptquizs() {
 		return attemptquizService.findAll();
@@ -28,6 +31,27 @@ public class attempquizController {
 	public attemptquiz retrieveattemptquiz(@PathVariable int id) {
 		return attemptquizService.findOne(id);
 	}
+	
+	//Get all the attempted quizes for the teacher based on the teacher and course id that they are teaching to 
+	@GetMapping("/attemptquiz/{teacherid}/{courseid}")
+	public List<attemptquiz> retrieveAttemptquizforteacher(@PathVariable int teacherid,@PathVariable int courseid) {
+		List<attemptquiz> attemptedQuizes= attemptquizService.findAll();
+		List<attemptquiz> specificquizes= attemptquizService.findAll();
+		for(attemptquiz q:attemptedQuizes)
+		{
+			List<teacherAssignment> teacherassigns = q.getEnrolled().getCourseEntity().getTeacherAssignments();
+			for(teacherAssignment t :teacherassigns)
+			{
+				if(t.getTeacherEntity().getId() == t.getTeacherEntity().getId() && t.getCourseEntity().getId() == courseid)
+				{
+					specificquizes.add(q);
+					break;
+				}
+			}
+		}
+		return specificquizes;
+	}
+	
 	
 	
 	@PostMapping("/attemptquiz")
