@@ -9,6 +9,7 @@ import TeacherAssignmentManagement from "./pages/TeacherAssignmentManagement/Tea
 import TeacherMgmt from "./pages/TeacherMgmt/TeacherMgmt.jsx";
 import EnrollManagement from "./pages/EnrollManagement/EnrollManagement.jsx";
 import {Route, Routes, useNavigate } from "react-router-dom";
+import CourseFeedback from "./pages/CourseFeedback/CourseFeedback.jsx";
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
       <p>{loginCredentials.loginId}</p>
       <p>{loginCredentials.loginType}</p>
 
-      <TeacherAssignmentManagement />
+      {/* <TeacherAssignmentManagement /> */}
 
       <Routes>
         <Route path="/" element={<LoginPage loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials}/>} />
@@ -35,6 +36,7 @@ function App() {
         <Route path="/courseManagement" element={<CourseMgmt />} />
         <Route path="/teacherManagement" element={<TeacherMgmt />} />
         <Route path="/enrollment" element={<EnrollManagement loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials} />} />
+        <Route path="/courseFeedback" element={<CourseFeedback loginCredentials={loginCredentials}/>} />
 
       </Routes>
     </div>
