@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.lms_backend.entity.teacherAssignment;
+import com.backend.lms_backend.entity.course;
 import com.backend.lms_backend.entity.teacher;
 import com.backend.lms_backend.service.teacherAssignmentService;
 import com.backend.lms_backend.service.teacherService;

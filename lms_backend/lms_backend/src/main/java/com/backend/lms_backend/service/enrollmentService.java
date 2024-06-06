@@ -45,4 +45,7 @@ public class enrollmentService {
 		return enrollmentDAO.findByStudentEntity(studentEntity);
 	}
 	
+	public List<enrollment> getByCourseIdAndSection(int course_id, String section) {
+		return enrollmentDAO.findByCourseEntity_idAndSection(course_id, section);
+	}
 }

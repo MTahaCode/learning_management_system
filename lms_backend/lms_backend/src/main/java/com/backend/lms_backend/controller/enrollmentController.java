@@ -36,6 +36,14 @@ public class enrollmentController {
 		return EnrollmentService.getEnrollmentsByStudent(studentEntity);
 	}
 	
+	@GetMapping("/enrollment/course/{course_id}/section/{section}")
+	public List<enrollment> retrieveEnrollmentsByCourse(
+			@PathVariable int course_id,
+			@PathVariable String section
+			) {
+		return EnrollmentService.getByCourseIdAndSection(course_id, section);
+	}
+	
 	@GetMapping("/enrollment/{id}")
 	public enrollment retrieveenrollment(@PathVariable int id) {
 		return EnrollmentService.findOne(id);
