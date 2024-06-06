@@ -21,7 +21,7 @@ public class quiz {
 	private String question3;
 	private String question4;
 	
-	
+	private Double totalMarks;
 	private Double weightage;
 	
 	@ManyToOne
@@ -32,8 +32,9 @@ public class quiz {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	public quiz(int id, String title, String description, String question1, String question2, String question3,
-			String question4, Double weightage, teacherAssignment teacher_course) {
+			String question4, Double totalMarks, Double weightage, teacherAssignment teacher_course) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -42,9 +43,11 @@ public class quiz {
 		this.question2 = question2;
 		this.question3 = question3;
 		this.question4 = question4;
+		this.totalMarks = totalMarks;
 		this.weightage = weightage;
 		this.teacher_course = teacher_course;
 	}
+
 
 	public int getId() {
 		return id;
@@ -116,6 +119,16 @@ public class quiz {
 
 	public void setTeacher_course(teacherAssignment teacher_course) {
 		this.teacher_course = teacher_course;
+	}
+
+
+	public Double getTotalMarks() {
+		return totalMarks;
+	}
+
+
+	public void setTotalMarks(Double totalMarks) {
+		this.totalMarks = totalMarks;
 	}
 
 	
