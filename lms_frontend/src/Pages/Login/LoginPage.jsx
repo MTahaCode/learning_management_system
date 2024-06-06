@@ -36,6 +36,9 @@ const LoginPage = ({loginCredentials, setLoginCredentials }) => {
             else if (loginCredentials.loginType === "student") {
                 navigate("/enrollment");
             }
+            else if (loginCredentials.loginType === "teacher") {
+                navigate("/attendanceManagement");
+            }
         }
     },[loginCredentials, navigate]);
 
@@ -47,10 +50,19 @@ const LoginPage = ({loginCredentials, setLoginCredentials }) => {
 
         //for student
         const studentCredentials = await checkLogin("/student/getByEmailAndPassword", "student");
-        setLoginCredentials(studentCredentials);
+        
+        if (studentCredentials.loginId !== 0) {
+            setLoginCredentials(studentCredentials); 
+            return;
+        }
 
         //for teacher and any other
+        const teacherCredentials = await checkLogin("/teacher/getByEmailAndPassword", "teacher");
 
+        if (teacherCredentials.loginId !== 0) {
+            setLoginCredentials(teacherCredentials);
+            return;
+        }
     }
     
     return (

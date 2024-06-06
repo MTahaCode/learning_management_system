@@ -1,11 +1,18 @@
 package com.backend.lms_backend.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class enrollment {
@@ -22,6 +29,10 @@ public class enrollment {
 	@JoinColumn(name= "course_id")
 	private course courseEntity;
 	
+	@OneToMany(mappedBy="enrollmentEntity", cascade= CascadeType.ALL)
+	@JsonManagedReference
+	private List<attendance> attendanceList;
+	
 	private String section;
 	private String semester;
 	private String grade;
@@ -30,16 +41,19 @@ public class enrollment {
 		super();
 	}
 
-	public enrollment(int id, student studentEntity, course courseEntity, String section, String semester,
-			String grade) {
+	public enrollment(int id, student studentEntity, course courseEntity, List<attendance> attendanceList,
+			String section, String semester, String grade) {
 		super();
 		this.id = id;
 		this.studentEntity = studentEntity;
 		this.courseEntity = courseEntity;
+		this.attendanceList = attendanceList;
 		this.section = section;
 		this.semester = semester;
 		this.grade = grade;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -88,4 +102,13 @@ public class enrollment {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
+
+	public List<attendance> getAttendanceList() {
+		return attendanceList;
+	}
+
+	public void setAttendanceList(List<attendance> attendanceList) {
+		this.attendanceList = attendanceList;
+	}
+	
 }

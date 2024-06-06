@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.backend.lms_backend.dao.teacherAssignmentDao;
 import com.backend.lms_backend.entity.teacherAssignment;
+import com.backend.lms_backend.entity.course;
 import com.backend.lms_backend.entity.teacher;
 
 @Service
