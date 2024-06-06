@@ -13,6 +13,7 @@ import AdminDashboard from "./pages/AdminDashboard/AdminDashboard.jsx";
 import TeacherDashboard from "./pages/TeacherDashboard/TeacherDashboard.jsx";
 import StudentDashboard from "./pages/StudentDashboard/StudentDashboard.jsx";
 import CourseFeedback from "./pages/CourseFeedback/CourseFeedback.jsx";
+import AnnouncementManagement from "./pages/AnnouncementManagement/AnnouncementManagement.jsx";
 import {Route, Routes, useNavigate } from "react-router-dom";
 
 function App() {
