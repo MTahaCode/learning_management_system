@@ -19,13 +19,11 @@ public class feedbackService {
 		return feedbackDAO.findAll();
 	}
 	
-	//add enrollment
 	public feedback save(feedback fb) {
 		feedbackDAO.save(fb);
 		return fb;
 	}
 	
-	//find one enrollment
 	public feedback findOne(int id) {
 		return feedbackDAO.findById(id).get();
 	}
