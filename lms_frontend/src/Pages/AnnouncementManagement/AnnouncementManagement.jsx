@@ -110,7 +110,7 @@ const AnnouncementManagement = ({ loginCredentials, setLoginCredentials }) => {
       <h1>Manage Announcements</h1>
       <h2>Select an Assignment</h2>
       <ul>
-        {assignmentList.map((assignment) => (
+        {assignmentList.length > 0 && assignmentList.map((assignment) => (
           <li key={assignment.id}>
             <button onClick={() => handleAssignmentSelection(assignment.id)}>
               {assignment.courseEntity.name} - {assignment.section} - {assignment.semester}

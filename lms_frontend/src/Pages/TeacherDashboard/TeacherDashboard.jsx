@@ -19,7 +19,7 @@ const TeacherDashboard = ({loginCredentials, setLoginCredentials}) => {
     <div>
       <h1>Teacher Dashboard</h1>
       <button onClick={() => navigate("/teacherDashboard/attendanceManagement")}>Mark Attendances</button>
-
+      <button onClick={() => navigate("/teacherDashboard/announcements")}>Post an Announcement</button>
       <Outlet />
     </div>
   )

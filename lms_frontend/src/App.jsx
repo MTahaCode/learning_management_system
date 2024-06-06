@@ -42,6 +42,7 @@ function App() {
         </Route>
         <Route path="/teacherDashboard" element={<TeacherDashboard loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials}/>} >
           <Route path="attendanceManagement" element={<AttendanceMgmt loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials}/>} />
+          <Route path="announcements" element={<AnnouncementManagement loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials}/>} />
         </Route>
         <Route path="/adminDashboard" element={<AdminDashboard loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials}/>} >
           <Route path="studentManagement" element={<StudentMgmt />} />
