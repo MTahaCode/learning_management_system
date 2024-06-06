@@ -39,7 +39,7 @@ public class marksController {
 	}
 	
 	//Assign marks to a submitted assignment
-	@PutMapping("/assignmarkstoquiz/{id}/{marksobtained}")
+	@PutMapping("/assignmarkstoassignment/{id}/{marksobtained}")
 	public submittedassignment assignMarksToSubmittedAssignment(@RequestBody submittedassignment stu, @PathVariable int id,@PathVariable double marksobtained) {
 		submittedassignment existingsubmittedassignment = submittedassignmentService.findOne(id);
 		if (existingsubmittedassignment == null) {
@@ -53,7 +53,7 @@ public class marksController {
 	}
 	
 	//Function to get marks for a particular attempted quiz
-	@GetMapping("/attemptquiz/{id}")
+	@GetMapping("/marksofattemptquiz/{id}")
 	public Double retrieveMarksOfAttemptQuiz(@PathVariable int id) {
 		attemptquiz existingattemptquiz = attemptquizService.findOne(id);
 		return existingattemptquiz.getMarksAttained();
@@ -61,7 +61,7 @@ public class marksController {
 	
 	
 	//Function to get marks for a particular attempted quiz
-		@GetMapping("/submittedassignment/{id}")
+		@GetMapping("/marksofsubmittedassignment/{id}")
 		public Double retrieveMarksOfSubmittedAssignment(@PathVariable int id) {
 			submittedassignment existingsubmittedassignment = submittedassignmentService.findOne(id);
 			return existingsubmittedassignment.getMarksAttained();
@@ -69,7 +69,7 @@ public class marksController {
 		
 		
 	//Get all the marks obtained of each submittedasssignment of a particular enrolled student with his enrollmentid
-	@GetMapping("/submittedassignment/{enrollmentid}")
+	@GetMapping("/marksofattemptedquizes/{enrollmentid}")
 	public List<Double> ObtainedMarksAllsubmittedassignments(@PathVariable int enrollmentid) {
 		List<submittedassignment> submissions = submittedassignmentService.findAll();
 		List<Double> marks= new ArrayList<Double>();
