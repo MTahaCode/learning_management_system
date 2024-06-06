@@ -1,5 +1,6 @@
 package com.backend.lms_backend.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +13,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.lms_backend.entity.assignment;
+import com.backend.lms_backend.entity.enrollment;
 import com.backend.lms_backend.service.assignmentService;
+import com.backend.lms_backend.service.enrollmentService;
+import com.backend.lms_backend.service.studentService;
 
 @RestController
 public class assignmentController {
 	@Autowired
 	private assignmentService assignmentService;
+	@Autowired
+	private enrollmentService EnrollmentService;
+	@Autowired
+	private studentService StudentService;
 	
 	@GetMapping("/assignment")
 	public List<assignment> retrieverAllassignments() {
@@ -27,6 +35,27 @@ public class assignmentController {
 	@GetMapping("/assignment/{id}")
 	public assignment retrieveassignment(@PathVariable int id) {
 		return assignmentService.findOne(id);
+	}
+	
+	//Give list of assigned assignment of specific student enrolled in that specifc course 
+	@GetMapping("/assignment/{studentid}/{courseid}")
+	public List<assignment> retrieveEnrollmentAssignments(@PathVariable int studentid,@PathVariable int courseid) {
+		List<assignment> assignments =new ArrayList<assignment>();
+
+		List<enrollment> enrolls = EnrollmentService.getEnrollmentsByStudent(StudentService.findOne(studentid));
+		for(assignment a: assignmentService.findAll())
+		{
+			for(enrollment e : enrolls)
+			{
+				if(a.getTeacher_course().getCourseEntity().getId() == e.getCourseEntity().getId() &&e.getCourseEntity().getId() == courseid)
+				{
+					assignments.add(a);
+					break;
+					
+				}
+			}
+		}
+		return assignments;
 	}
 	
 	
@@ -59,4 +88,6 @@ public class assignmentController {
 		return assignmentService.updateassignment(stu);
 		
 	}
+	
+	
 }
