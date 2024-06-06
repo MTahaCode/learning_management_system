@@ -17,16 +17,21 @@ public class attemptquiz {
 	private String answer3;
 	private String answer4;
 	
+	private Double marksAttained;
 	@OneToOne
 	private enrollment enrolled;
 
-	public attemptquiz(int id, String answer1, String answer2, String answer3, String answer4, enrollment enrolled) {
+	
+
+	public attemptquiz(int id, String answer1, String answer2, String answer3, String answer4, Double marksAttained,
+			enrollment enrolled) {
 		super();
 		this.id = id;
 		this.answer1 = answer1;
 		this.answer2 = answer2;
 		this.answer3 = answer3;
 		this.answer4 = answer4;
+		this.marksAttained = marksAttained;
 		this.enrolled = enrolled;
 	}
 

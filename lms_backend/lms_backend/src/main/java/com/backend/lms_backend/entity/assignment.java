@@ -15,14 +15,29 @@ public class assignment {
 	private String title;
 	private String description;
 	
+	private Double totalMarks;
+	private Double weightage;
 	@ManyToOne
 	private teacherAssignment teacher_course;
 
-	public assignment(int id, String title, String description, teacherAssignment teacher_course) {
+	public Double getWeightage() {
+		return weightage;
+	}
+
+	public void setWeightage(Double weightage) {
+		this.weightage = weightage;
+	}
+
+	
+
+	public assignment(int id, String title, String description, Double totalMarks, Double weightage,
+			teacherAssignment teacher_course) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
+		this.totalMarks = totalMarks;
+		this.weightage = weightage;
 		this.teacher_course = teacher_course;
 	}
 
@@ -61,6 +76,14 @@ public class assignment {
 
 	public void setTeacher_course(teacherAssignment teacher_course) {
 		this.teacher_course = teacher_course;
+	}
+
+	public Double getTotalMarks() {
+		return totalMarks;
+	}
+
+	public void setTotalMarks(Double totalMarks) {
+		this.totalMarks = totalMarks;
 	}
 	
 }
