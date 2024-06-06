@@ -122,7 +122,6 @@ const AttendanceMgmt = ({loginCredentials, setLoginCredentials}) => {
 
     return (
         <div>
-            first select my courses in which im assigned to
             <h1>My Courses: </h1>
             <table>
                 <thead>
@@ -189,13 +188,6 @@ const AttendanceMgmt = ({loginCredentials, setLoginCredentials}) => {
             </table>
             <button onClick={() => handleSave()}>Save</button>
             <button onClick={handleAddAttendance}>Add new attendance</button>
-
-            then add a new column based on date
-
-            then mark the attendances
-
-            then save
-            
         </div>
     )
 }

@@ -34,10 +34,13 @@ const LoginPage = ({loginCredentials, setLoginCredentials }) => {
                 alert("Cannot find login and password");
             }
             else if (loginCredentials.loginType === "student") {
-                navigate("/enrollment");
+                navigate("/studentDashboard");
             }
             else if (loginCredentials.loginType === "teacher") {
-                navigate("/attendanceManagement");
+                navigate("/teacherDashboard");
+            }
+            else if (loginCredentials.loginType === "admin") {
+                navigate("/adminDashboard");
             }
         }
     },[loginCredentials, navigate]);
@@ -46,7 +49,15 @@ const LoginPage = ({loginCredentials, setLoginCredentials }) => {
 
         event.preventDefault();
 
-        //check for each one differently
+        //for admin
+        if (loginData.email === "admin@admin.com" && loginData.password === "admin") {
+            setLoginCredentials({
+                loginId: 1,
+                loginType: "admin"
+            })
+            return;
+        }
+        
 
         //for student
         const studentCredentials = await checkLogin("/student/getByEmailAndPassword", "student");
@@ -56,7 +67,7 @@ const LoginPage = ({loginCredentials, setLoginCredentials }) => {
             return;
         }
 
-        //for teacher and any other
+        //for teacher
         const teacherCredentials = await checkLogin("/teacher/getByEmailAndPassword", "teacher");
 
         if (teacherCredentials.loginId !== 0) {
