@@ -1,28 +1,44 @@
-import React, { useEffect } from 'react'
-import { Outlet, useNavigate } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import "../../css/TeacherDashboard.css";
 
-const TeacherDashboard = ({loginCredentials, setLoginCredentials}) => {
-
+const TeacherDashboard = ({ loginCredentials, setLoginCredentials }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-      if (loginCredentials.loginType !== "teacher") {
-          setLoginCredentials({
-              loginId: 0,
-              loginType: ""
-          });
-          navigate("/");
-      }
-  }, []);
+    if (loginCredentials.loginType !== "teacher") {
+      setLoginCredentials({
+        loginId: 0,
+        loginType: "",
+      });
+      navigate("/");
+    }
+  }, [loginCredentials, navigate, setLoginCredentials]);
 
   return (
-    <div>
-      <h1>Teacher Dashboard</h1>
-      <button onClick={() => navigate("/teacherDashboard/attendanceManagement")}>Mark Attendances</button>
-      <button onClick={() => navigate("/teacherDashboard/announcements")}>Post an Announcement</button>
-      <Outlet />
+    <div className="dashboard-container">
+      <nav className="sidebar">
+        <h2>Teacher Dashboard</h2>
+        <ul>
+          <li>
+            <button
+              onClick={() => navigate("/teacherDashboard/attendanceManagement")}
+            >
+              Mark Attendances
+            </button>
+          </li>
+          <li>
+            <button onClick={() => navigate("/teacherDashboard/announcements")}>
+              Post an Announcement
+            </button>
+          </li>
+        </ul>
+      </nav>
+      <main className="main-content">
+        <Outlet />
+      </main>
     </div>
-  )
-}
+  );
+};
 
-export default TeacherDashboard
+export default TeacherDashboard;

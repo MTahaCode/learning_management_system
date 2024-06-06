@@ -1,0 +1,92 @@
+.announcement-container {
+    padding: 2rem;
+    background-color: #f4f4f9;
+    min-height: 100vh;
+  }
+  
+  h1, h2 {
+    text-align: center;
+  }
+  
+  .assignment-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .assignment-list li {
+    margin: 0.5rem;
+  }
+  
+  .assignment-list button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .assignment-list button:hover {
+    background-color: #0056b3;
+  }
+  
+  .announcement-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .announcement-list li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .announcement-textarea {
+    width: calc(100% - 100px); /* Adjust width based on delete button width */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  
+  .delete-button {
+    padding: 8px 12px;
+    background-color: #dc3545; /* Red color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: auto; /* Move button to right */
+  }
+  
+  .delete-button:hover {
+    background-color: #c82333; /* Darker red on hover */
+  }
+  
+  .new-announcement-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  
+  .post-announcement-button {
+    display: block; /* Change button display to block */
+    margin: 0 auto; /* Center the button horizontally */
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .post-announcement-button:hover {
+    background-color: #218838;
+  }
+  
+  

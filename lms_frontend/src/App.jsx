@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import logo from './logo.svg';
-import './App.css';
+import './css/App.css';
 import "./pages/StudentMgmt/StudentMgmt.jsx"
 import StudentMgmt from './pages/StudentMgmt/StudentMgmt.jsx';
 import CourseMgmt from './pages/CourseMgmt/CourseMgmt.jsx';

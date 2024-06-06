@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
+import "../../css/AnnouncementManagement.css";
 
 const AnnouncementManagement = ({ loginCredentials, setLoginCredentials }) => {
   const [assignmentList, setAssignmentList] = useState([]);
@@ -11,9 +12,9 @@ const AnnouncementManagement = ({ loginCredentials, setLoginCredentials }) => {
   }, []);
 
   const getTeacherAssignments = () => {
-    fetch(`/teacher/assignments/${loginCredentials.loginId}`)
-      .then(res => res.json())
-      .then(data => {
+    fetch(`/teacherAssignment/teacher/${loginCredentials.loginId}`)
+      .then((res) => res.json())
+      .then((data) => {
         setAssignmentList(data);
       })
       .catch((exc) => {
@@ -22,9 +23,9 @@ const AnnouncementManagement = ({ loginCredentials, setLoginCredentials }) => {
   };
 
   const getAnnouncementsByAssignment = (assignmentId) => {
-    fetch(`/announcement/assignment/${assignmentId}`)
-      .then(res => res.json())
-      .then(data => {
+    fetch(`/announcements/teacherAssignment/${assignmentId}`)
+      .then((res) => res.json())
+      .then((data) => {
         setAnnouncementList(data);
       })
       .catch((exc) => {
@@ -50,14 +51,14 @@ const AnnouncementManagement = ({ loginCredentials, setLoginCredentials }) => {
       announcementDate: new Date(),
     };
 
-    fetch(`/announcement`, {
+    fetch(`/announcements`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(announcementData)
+      body: JSON.stringify(announcementData),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then((data) => {
         setNewAnnouncement("");
         getAnnouncementsByAssignment(selectedAssignment);
@@ -68,7 +69,7 @@ const AnnouncementManagement = ({ loginCredentials, setLoginCredentials }) => {
   };
 
   const handleDeleteAnnouncement = (announcementId) => {
-    fetch(`/announcement/${announcementId}`, {
+    fetch(`/announcements/${announcementId}`, {
       method: "DELETE",
     })
       .then(() => {
@@ -89,14 +90,14 @@ const AnnouncementManagement = ({ loginCredentials, setLoginCredentials }) => {
       announcementDate: new Date(),
     };
 
-    fetch(`/announcement/${announcementId}`, {
+    fetch(`/announcements/${announcementId}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(updatedAnnouncement)
+      body: JSON.stringify(updatedAnnouncement),
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(() => {
         getAnnouncementsByAssignment(selectedAssignment);
       })
@@ -106,40 +107,59 @@ const AnnouncementManagement = ({ loginCredentials, setLoginCredentials }) => {
   };
 
   return (
-    <div>
+    <div className="announcement-container">
       <h1>Manage Announcements</h1>
       <h2>Select an Assignment</h2>
-      <ul>
-        {assignmentList.length > 0 && assignmentList.map((assignment) => (
-          <li key={assignment.id}>
-            <button onClick={() => handleAssignmentSelection(assignment.id)}>
-              {assignment.courseEntity.name} - {assignment.section} - {assignment.semester}
-            </button>
-          </li>
-        ))}
+      <ul className="assignment-list">
+        {assignmentList.length > 0 &&
+          assignmentList.map((assignment) => (
+            <li key={assignment.id}>
+              <button onClick={() => handleAssignmentSelection(assignment.id)}>
+                {assignment.courseEntity.name} - {assignment.section}
+              </button>
+            </li>
+          ))}
       </ul>
 
       {selectedAssignment && (
         <div>
           <h2>Announcements for Selected Assignment</h2>
-          <ul>
-            {announcementList.map((announcement) => (
-              <li key={announcement.id}>
-                <textarea
-                  defaultValue={announcement.announcementData}
-                  onBlur={(event) => handleUpdateAnnouncement(announcement.id, event.target.value)}
-                />
-                <button onClick={() => handleDeleteAnnouncement(announcement.id)}>Delete</button>
-              </li>
-            ))}
+          <ul className="announcement-list">
+            {announcementList.length > 0 &&
+              announcementList.map((announcement) => (
+                <li key={announcement.id}>
+                  <textarea
+                    defaultValue={announcement.announcementData}
+                    onBlur={(event) =>
+                      handleUpdateAnnouncement(
+                        announcement.id,
+                        event.target.value
+                      )
+                    }
+                    className="announcement-textarea"
+                  />
+                  <button
+                    onClick={() => handleDeleteAnnouncement(announcement.id)}
+                    className="delete-button"
+                  >
+                    Delete
+                  </button>
+                </li>
+              ))}
           </ul>
 
           <h2>Add New Announcement</h2>
           <textarea
             value={newAnnouncement}
             onChange={handleNewAnnouncementChange}
+            className="new-announcement-textarea"
           />
-          <button onClick={handleAnnouncementSubmission}>Post Announcement</button>
+          <button
+            onClick={handleAnnouncementSubmission}
+            className="post-announcement-button"
+          >
+            Post Announcement
+          </button>
         </div>
       )}
     </div>
