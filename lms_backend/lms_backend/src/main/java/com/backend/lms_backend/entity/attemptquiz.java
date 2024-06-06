@@ -31,7 +31,7 @@ public class attemptquiz {
 		this.answer2 = answer2;
 		this.answer3 = answer3;
 		this.answer4 = answer4;
-		this.marksAttained = marksAttained;
+		this.setMarksAttained(marksAttained);
 		this.enrolled = enrolled;
 	}
 
@@ -86,6 +86,14 @@ public class attemptquiz {
 
 	public void setEnrolled(enrollment enrolled) {
 		this.enrolled = enrolled;
+	}
+
+	public Double getMarksAttained() {
+		return marksAttained;
+	}
+
+	public void setMarksAttained(Double marksAttained) {
+		this.marksAttained = marksAttained;
 	}
 	
 }
