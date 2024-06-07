@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -18,7 +19,8 @@ public class assignment {
 	private Double totalMarks;
 	private Double weightage;
 	@ManyToOne
-	private teacherAssignment teacher_course;
+	@JoinColumn(name= "teacher_assignment_id")
+	private teacherAssignment teacherAssignmentEntity;
 
 	public Double getWeightage() {
 		return weightage;
@@ -31,14 +33,14 @@ public class assignment {
 	
 
 	public assignment(int id, String title, String description, Double totalMarks, Double weightage,
-			teacherAssignment teacher_course) {
+			teacherAssignment teacherAssignmentEntity) {
 		super();
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.totalMarks = totalMarks;
 		this.weightage = weightage;
-		this.teacher_course = teacher_course;
+		this.teacherAssignmentEntity = teacherAssignmentEntity;
 	}
 
 	public assignment() {
@@ -70,12 +72,11 @@ public class assignment {
 		this.description = description;
 	}
 
-	public teacherAssignment getTeacher_course() {
-		return teacher_course;
+	public teacherAssignment getTeacherAssignmentEntity() {
+		return teacherAssignmentEntity;
 	}
-
-	public void setTeacher_course(teacherAssignment teacher_course) {
-		this.teacher_course = teacher_course;
+	public void setTeacherAssignmentEntity(teacherAssignment teacherAssignmentEntity) {
+		this.teacherAssignmentEntity = teacherAssignmentEntity;
 	}
 
 	public Double getTotalMarks() {

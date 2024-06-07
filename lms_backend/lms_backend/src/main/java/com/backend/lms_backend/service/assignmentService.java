@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.backend.lms_backend.dao.assignmentDao;
 import com.backend.lms_backend.entity.assignment;
+import com.backend.lms_backend.entity.teacher;
+import com.backend.lms_backend.entity.teacherAssignment;
 
 
 @Service
@@ -40,5 +42,8 @@ public class assignmentService {
 		public assignment updateassignment(assignment assign) {
 			assignmentDAO.save(assign);
 			return assign;
+		}
+		public List<assignment> getTeacherAssignmentsByTeacher( teacherAssignment teacherAssignmentEntity ) {
+			return assignmentDAO.findByTeacherAssignmentEntity(teacherAssignmentEntity);
 		}
 }
