@@ -32,6 +32,11 @@ const TeacherDashboard = ({ loginCredentials, setLoginCredentials }) => {
               Post an Announcement
             </button>
           </li>
+          <li>
+            <button onClick={() => navigate("/teacherDashboard/quizManagement")}>
+              Make a Quiz
+            </button>
+          </li>
         </ul>
       </nav>
       <main className="main-content">

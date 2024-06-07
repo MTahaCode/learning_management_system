@@ -14,6 +14,7 @@ import TeacherDashboard from "./pages/TeacherDashboard/TeacherDashboard.jsx";
 import StudentDashboard from "./pages/StudentDashboard/StudentDashboard.jsx";
 import CourseFeedback from "./pages/CourseFeedback/CourseFeedback.jsx";
 import AnnouncementManagement from "./pages/AnnouncementManagement/AnnouncementManagement.jsx";
+import QuizMgmt from "./pages/QuzMgmt/QuizMgmt.jsx";
 import {Route, Routes, useNavigate } from "react-router-dom";
 
 function App() {
@@ -43,6 +44,8 @@ function App() {
         <Route path="/teacherDashboard" element={<TeacherDashboard loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials}/>} >
           <Route path="attendanceManagement" element={<AttendanceMgmt loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials}/>} />
           <Route path="announcements" element={<AnnouncementManagement loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials}/>} />
+          <Route path="quizManagement" element={<QuizMgmt loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials}/>} />
+
         </Route>
         <Route path="/adminDashboard" element={<AdminDashboard loginCredentials={loginCredentials} setLoginCredentials={setLoginCredentials}/>} >
           <Route path="studentManagement" element={<StudentMgmt />} />

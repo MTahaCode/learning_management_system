@@ -1,9 +1,12 @@
 package com.backend.lms_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -25,6 +28,8 @@ public class quiz {
 	private Double weightage;
 	
 	@ManyToOne
+	@JoinColumn(name = "teacher_assignment_id")
+	@JsonBackReference
 	private teacherAssignment teacher_course;
 	
 	public quiz() {

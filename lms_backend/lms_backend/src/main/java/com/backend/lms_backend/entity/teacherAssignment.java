@@ -1,11 +1,16 @@
 package com.backend.lms_backend.entity;
 
+import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class teacherAssignment {
@@ -21,6 +26,10 @@ public class teacherAssignment {
 	@ManyToOne
 	@JoinColumn(name= "course_id")
 	private course courseEntity;
+	
+	@OneToMany(mappedBy="teacher_course", cascade= CascadeType.ALL)
+	@JsonManagedReference
+	private List<quiz> quizList;
 	
 	private String section;
 	private String semester;
@@ -77,5 +86,13 @@ public class teacherAssignment {
 
 	public void setSemester(String semester) {
 		this.semester = semester;
+	}
+
+	public List<quiz> getQuizList() {
+		return quizList;
+	}
+
+	public void setQuizList(List<quiz> quizList) {
+		this.quizList = quizList;
 	}
 }
